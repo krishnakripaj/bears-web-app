@@ -2,26 +2,25 @@ import React, { Component } from "react";
 
 class Bear extends Component {
   state = {
-    bearName: this.props.bearName,
-    bearId: -345,
-    likeCount: this.props.likeCount
   };
   render() {
     return (
       <div className="card" style={{ width: "18rem" }}>
         {/* <h3> Individual Bear Component </h3> */}
-        <img src="logo512.png" className="card-img-top" alt="..." />
+        <img src={this.props.bear.imgUrl} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">{this.state.bearName}</h5>
+          <h5 className="card-title">{this.props.bear.name}</h5>
           <p className="card-text">
-            Bear Movies
+            {this.props.bear.type}
           </p>
           <ul>
-              <li>Movie 1</li>
-              <li>Movie 2</li>
+             {this.props.bear.movies.map(movie => <li>{movie}</li>)}
             </ul>
-          <button type="button" className="btn btn-primary" onClick={()=>{this.likeBear(1)}}>
-            Like <span className="badge bg-light text-dark">{this.state.likeCount}</span>
+          <button type="button" className="btn btn-primary" onClick={this.props.onLike}>
+            Like <span className="badge bg-light text-dark">{this.props.bear.likeCount}</span>
+          </button>{" "}
+          <button type="button" className="btn btn-danger" onClick={this.props.onDelete}>
+            Delete
           </button>
         </div>
       </div>
